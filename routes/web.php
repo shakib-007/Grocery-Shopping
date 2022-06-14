@@ -39,6 +39,15 @@ Route::get('/delete/{id}', [ProductController::class, 'deleteProduct']);
 //ORDER
 
 Route::get('/orderview',[ProductController::class, 'order']);
+
 Route::post('/placeorder',[InvoiceController::class, 'placeOrder']);
+
+Route::get('/invoicelist',[InvoiceController::class, 'invoiceList']);
+
+Route::get('/view/{id}',[InvoiceController::class, 'viewInvoice']);
+
+Route::get('/deleteinvoice/{id}',[InvoiceController::class, 'deleteInvoice']);
+
+
 
 

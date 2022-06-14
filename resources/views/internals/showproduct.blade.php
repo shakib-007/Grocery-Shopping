@@ -2,9 +2,9 @@
 
 @section('content')
 <hr>
-<h2>Product List</h2>
+<h2 style="color: rgb(18, 25, 119)">Product List</h2>
 <hr>
-<table style="width:80%" class="table table-striped" >
+<table style="width:100%" class="table table-striped" >
     <tr>
         <th>SL</th>
         <th>Name</th>
@@ -29,7 +29,7 @@
             <td>{{$product->available_quantity}}</td>
             <td>{{$product->purchase_price}}</td>
             <td><a href="/edit/{{$product->id}}" class="btn btn-info">Edit</a></td>
-            <td><a href="/delete/{{$product->id}}" class="btn btn-info">Delete</a></td>
+            <td><a href="/delete/{{$product->id}}" class="btn btn-danger">Delete</a></td>
 
 
            

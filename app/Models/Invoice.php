@@ -11,7 +11,7 @@ class Invoice extends Model
 
     protected $table = 'invoices';
 
-    public function soldItem()
+    public function soldItems()
     {
         return $this->hasMany(SoldItem::class);
     }

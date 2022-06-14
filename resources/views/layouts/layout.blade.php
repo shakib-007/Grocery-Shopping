@@ -11,7 +11,7 @@
     <title>SHAWPNO</title>
 </head>
 <body>
-    <ul class="nav" style="background-color:rgb(51, 153, 255);">
+    <ul class="nav" style="background-color:rgb(10, 41, 87);">
         {{-- <li class="nav-item" >
           <a class="nav-link active"  href="{{route('in')}}">Home</a>
         </li> --}}
@@ -26,6 +26,9 @@
         </li>
         <li class="nav-item">
             <a class="nav-link text-white" href="/orderview"><b>Order</b></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="/invoicelist"><b>Invoice List</b></a>
         </li>
       </ul>
     <div class="container">

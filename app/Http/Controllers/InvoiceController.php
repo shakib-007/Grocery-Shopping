@@ -9,9 +9,46 @@ use App\Models\Product;
 
 class InvoiceController extends Controller
 {
+
+    public function viewInvoice($id)
+    {
+        $sold_items = SoldItem::join('products' , 'products.id', '=' ,'sold_items.product_id')
+        ->select('products.name' ,'products.sku' ,'products.description' , 'sold_items.quantity' , 'sold_items.selling_price')
+        ->where('sold_items.invoice_id', '=', $id)
+        ->get();
+
+        $invoices = Invoice::find($id);
+        
+        return view('internals.viewinvoice')->with('invoices' , $invoices)
+                                            ->with('sold_items' , $sold_items);
+    }
+
+    public function invoiceList()
+    {
+        $invoices =  Invoice::all();
+        return view('internals.invoicelist')->with('invoices', $invoices);
+    }
+
+    public function deleteInvoice($id)
+    {
+        $invoice = Invoice::find($id);
+        $invoice->soldItems()->delete();
+        $invoice->delete();
+
+        return redirect('/invoicelist');
+    }
     
     public function placeOrder(Request $request)
     {
+        
+        // dd($request->product1);
+
+        $this->validate($request, [
+            'invoice_no' => 'required',
+            'email' => 'required',
+            'payment_method' => 'required',
+            'date' => 'required'
+        ]);
         
         $total = 0;
 
@@ -94,6 +131,7 @@ class InvoiceController extends Controller
         $invoice->date = $request->date;
         $invoice->save();
 
+        // $products->avalable_quantity -= $request->qty1;
 
         foreach($cart as $item)
         {
@@ -105,6 +143,10 @@ class InvoiceController extends Controller
             $sold_item->selling_price = $item['selling_price'];
             $sold_item->save();
 
+            // $product = new Product();
+            // $product->available_quantity -= $item['quantity'];
+            // $product->save();
+
             $total += $item['quantity'] * $item['selling_price'];
 
         }
@@ -115,7 +157,7 @@ class InvoiceController extends Controller
         // return view('internals.invoice');
         // return Invoice::all();
 
-        
+        return redirect('/invoicelist');
 
     }
 }
