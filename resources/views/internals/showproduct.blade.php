@@ -1,10 +1,12 @@
 @extends('layouts.layout')
 
+
 @section('content')
 <hr>
 <h2 style="color: rgb(18, 25, 119)">Product List</h2>
 <hr>
-<table style="width:100%" class="table table-striped" >
+<table style="width:100%" class="table table-striped" id="product">
+    <thead>
     <tr>
         <th>SL</th>
         <th>Name</th>
@@ -15,11 +17,11 @@
         <th>Operation</th>
         <th></th>
     </tr>
-
+ </thead>
     @php
         $serial = 0;
     @endphp
-
+<tbody>
     @foreach ( $products as $product )
         <tr>
             <td>{{++$serial}}</td>
@@ -35,6 +37,19 @@
            
         </tr>
     @endforeach
+</tbody>
     
 </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#product').DataTable();
+        } );
+    </script>
+
+
 @endsection

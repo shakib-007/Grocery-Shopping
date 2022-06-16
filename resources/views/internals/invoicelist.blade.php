@@ -6,7 +6,8 @@
 {{-- {{$sold_items->profit}} --}}
 {{-- {{dd($sold_items)}} --}}
 <hr>
-<table style="width:100%" class="table table-striped" >
+<table style="width:100%" class="table table-striped" id="invoice">
+    <thead>
     <tr>
         <th>SL</th>
         <th>Invoice Number</th>
@@ -18,11 +19,12 @@
         <th>Operation</th>
         <th></th>
     </tr>
+ </thead>
    
     @php
         $serial = 0;
     @endphp
-
+<tbody>
     @foreach ( $invoices as $invoice )
         <tr>
             <td>{{++$serial}}</td>
@@ -33,11 +35,11 @@
             <td> 
                 @foreach ($profits as $profit)
                     @if ($profit->id == $invoice->id)
-                    {{$profit->profit}}
+                    {{$profit->grossprofit}}
                     @endif
                 @endforeach
             </td>
-            {{-- <td>{{$sold_items->profit}}</td> --}}
+           
             <td>{{$invoice->date}}</td>
             <td><a href="/view/{{$invoice->id}}" class="btn btn-info">View</a></td>
             <td><a href="/deleteinvoice/{{$invoice->id}}" class="btn btn-danger">Delete</a></td>
@@ -46,6 +48,16 @@
            
         </tr>
     @endforeach
-    
+</tbody>
+
 </table>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#invoice').DataTable();
+        } );
+    </script>
 @endsection

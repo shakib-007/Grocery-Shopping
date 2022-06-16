@@ -39,8 +39,8 @@ class InvoiceController extends Controller
     public function invoiceList()
     {
         $profits = SoldItem::join('invoices as i' , 'i.id', '=' ,'sold_items.invoice_id')
-                                ->join('products as p' , 'p.id', '=' ,'sold_items.product_id')
-            ->select(DB::raw('i.id , SUM((sold_items.selling_price - p.purchase_price) * sold_items.quantity) as profit') )
+                            ->join('products as p' , 'p.id', '=' ,'sold_items.product_id')
+            ->select(DB::raw('i.id , SUM((sold_items.selling_price - p.purchase_price) * sold_items.quantity) as grossprofit') )
             ->groupBy('i.id')
             ->get();
 
