@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\SoldItem;
@@ -12,11 +13,23 @@ class InvoiceController extends Controller
 
     public function viewInvoice($id)
     {
-        $sold_items = SoldItem::join('products' , 'products.id', '=' ,'sold_items.product_id')
-        ->select('products.name' ,'products.sku' ,'products.description' , 'sold_items.quantity' , 'sold_items.selling_price')
+        $sold_items = SoldItem::join('products as p' , 'p.id', '=' ,'sold_items.product_id')
+        ->select('p.name' ,'p.sku' ,'p.description' ,'p.purchase_price' ,'sold_items.quantity' , 'sold_items.selling_price' )
         ->where('sold_items.invoice_id', '=', $id)
         ->get();
 
+        // $sold_items = SoldItem::join('products as p' , 'p.id', '=' ,'sold_items.product_id')
+        // ->select('p.name' ,'p.sku' ,'p.description' ,'p.purchase_price' ,'sold_items.quantity' , 'sold_items.selling_price' , 
+        //      DB::raw('SUM((sold_items.selling_price - p.purchase_price) * sold_items.quantity) as profit') )
+        // ->where('sold_items.invoice_id', '=', $id)
+        
+        // ->get();
+        
+
+        // 
+        // ->sum('(' ,'sold_items.selling_price', '-' ,'p.purchase_price' , ')' ,'*' ,'sold_items.quantity' )
+        //->raw('sum(sold_items.selling_price - p.purchase_price)*sold_items.quantity as profit')
+        //DB::raw("sum(sold_items.selling_price - p.purchase_price)*sold_items.quantity as profit")
         $invoices = Invoice::find($id);
         
         return view('internals.viewinvoice')->with('invoices' , $invoices)
@@ -25,8 +38,16 @@ class InvoiceController extends Controller
 
     public function invoiceList()
     {
+        $profits = SoldItem::join('invoices as i' , 'i.id', '=' ,'sold_items.invoice_id')
+                                ->join('products as p' , 'p.id', '=' ,'sold_items.product_id')
+            ->select(DB::raw('i.id , SUM((sold_items.selling_price - p.purchase_price) * sold_items.quantity) as profit') )
+            ->groupBy('i.id')
+            ->get();
+
+        
         $invoices =  Invoice::all();
-        return view('internals.invoicelist')->with('invoices', $invoices);
+        return view('internals.invoicelist')->with('invoices', $invoices)
+                                            ->with('profits' , $profits);
     }
 
     public function deleteInvoice($id)

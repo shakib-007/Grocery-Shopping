@@ -42,6 +42,8 @@ Route::get('/orderview',[ProductController::class, 'order']);
 
 Route::post('/placeorder',[InvoiceController::class, 'placeOrder']);
 
+//INVOICE
+
 Route::get('/invoicelist',[InvoiceController::class, 'invoiceList']);
 
 Route::get('/view/{id}',[InvoiceController::class, 'viewInvoice']);

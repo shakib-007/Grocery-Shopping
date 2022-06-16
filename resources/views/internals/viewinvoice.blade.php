@@ -43,15 +43,27 @@
         <th>Description</th>
         <th>Quantity</th>
         <th>Selling Price</th>
+        <th>Sub total</th>
+       
     </tr>
+    @php
+        $totalpurchaseprice = 0;
+    @endphp
     @foreach ($sold_items as $sold_item)
         <tr>
+        
             <td>{{++$serial}}</td>
-            <td>{{$sold_item->name}}</td>
+            <td>{{$sold_item->name}}({{$sold_item->purchase_price}})</td>
             <td>{{$sold_item->sku}}</td>
             <td>{{$sold_item->description}}</td>
             <td>{{$sold_item->quantity}}</td>
             <td>{{$sold_item->selling_price}}</td>
+            <td>{{$sold_item->quantity * $sold_item->selling_price}}</td>
+            
+            {{-- <td>{{$sold_item->profit}}</td>
+            @php
+                $totalpurchaseprice += $sold_item->profit;
+            @endphp --}}
         </tr>
     @endforeach
     <tr>
@@ -59,8 +71,11 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <th>Grand Total  =  </th>
         <td>{{$invoices->total}}</td>
+        {{-- <td>{{$sold_item->profit}}</td> --}}
+        {{-- <td>{{$totalpurchaseprice}}</td> --}}
     </tr>
 </table>
 
