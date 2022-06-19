@@ -20,35 +20,35 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/products',[ProductController::class,'productList']);
+Route::get('/products',[ProductController::class,'productList'])->name('products');
 
 //PRODUCTS ADD EDIT UPDATE DELETE
 
-Route::get('/show',[ProductController::class,'showProduct']);
+Route::get('/show',[ProductController::class,'showProduct'])->name('show');
 
-Route::get('/create',[ProductController::class,'addProduct']);
+Route::get('/create',[ProductController::class,'addProduct'])->name('create');
 
-Route::post('/store', [ProductController::class, 'storeProduct']);
+Route::post('/store', [ProductController::class, 'storeProduct'])->name('store');
 
-Route::get('/edit/{id}',[ProductController::class,'editProduct']);
+Route::get('/edit/{id}',[ProductController::class,'editProduct'])->name('edit');
 
-Route::post('/update/{id}', [ProductController::class, 'updateProduct']);
+Route::post('/update/{id}', [ProductController::class, 'updateProduct'])->name('update');
 
-Route::get('/delete/{id}', [ProductController::class, 'deleteProduct']);
+Route::get('/delete/{id}', [ProductController::class, 'deleteProduct'])->name('delete');
 
 //ORDER
 
-Route::get('/orderview',[ProductController::class, 'order']);
+Route::get('/orderview',[ProductController::class, 'order'])->name('orderview');
 
-Route::post('/placeorder',[InvoiceController::class, 'placeOrder']);
+Route::post('/placeorder',[InvoiceController::class, 'placeOrder'])->name('placeorder');
 
 //INVOICE
 
-Route::get('/invoicelist',[InvoiceController::class, 'invoiceList']);
+Route::get('/invoicelist',[InvoiceController::class, 'invoiceList'])->name('invoicelist');
 
-Route::get('/view/{id}',[InvoiceController::class, 'viewInvoice']);
+Route::get('/view/{id}',[InvoiceController::class, 'viewInvoice'])->name('view');
 
-Route::get('/deleteinvoice/{id}',[InvoiceController::class, 'deleteInvoice']);
+Route::get('/deleteinvoice/{id}',[InvoiceController::class, 'deleteInvoice'])->name('deleteinvoice');
 
 
 

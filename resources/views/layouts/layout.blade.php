@@ -21,16 +21,16 @@
           <a class="nav-link text-white" href="/"><b>Home</b></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="/show"><b>Product List</b></a>
+          <a class="nav-link text-white" href="{{route('show')}}"><b>Product List</b></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="/create"><b>Add Product</b></a>
+            <a class="nav-link text-white" href="{{route('create')}}"><b>Add Product</b></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="/orderview"><b>Order</b></a>
+            <a class="nav-link text-white" href="{{route('orderview')}}"><b>Order</b></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="/invoicelist"><b>Invoice List</b></a>
+            <a class="nav-link text-white" href="{{route('invoicelist')}}"><b>Invoice List</b></a>
         </li>
       </ul>
     <div class="container">
