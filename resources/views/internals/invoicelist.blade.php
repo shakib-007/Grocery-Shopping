@@ -41,8 +41,8 @@
             </td>
            
             <td>{{$invoice->date}}</td>
-            <td><a href="/view/{{$invoice->id}}" class="btn btn-info">View</a></td>
-            <td><a href="/deleteinvoice/{{$invoice->id}}" class="btn btn-danger">Delete</a></td>
+            <td><a href="/view/{{$invoice->id}}" class="btn btn-info btn-sm">View</a></td>
+            <td><a href="/deleteinvoice/{{$invoice->id}}" class="btn btn-danger btn-sm">Delete</a></td>
 
 
            

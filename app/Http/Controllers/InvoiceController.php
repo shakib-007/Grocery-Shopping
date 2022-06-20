@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\SoldItem;
 use App\Models\Product;
+use App\Mail\OrderConfirmationMail;
 
 class InvoiceController extends Controller
 {
@@ -177,6 +179,8 @@ class InvoiceController extends Controller
         
         // return view('internals.invoice');
         // return Invoice::all();
+
+        Mail::to($request->email)->send(new OrderConfirmationMail($invoice->id));
 
         return redirect('/invoicelist');
 

@@ -53,7 +53,7 @@
         <tr>
         
             <td>{{++$serial}}</td>
-            <td>{{$sold_item->name}}({{$sold_item->purchase_price}})</td>
+            <td>{{$sold_item->name}}</td>
             <td>{{$sold_item->sku}}</td>
             <td>{{$sold_item->description}}</td>
             <td>{{$sold_item->quantity}}</td>

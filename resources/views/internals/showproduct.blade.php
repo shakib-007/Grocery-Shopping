@@ -31,8 +31,8 @@
             <td>{{$product->available_quantity}}</td>
             <td>{{$product->purchase_price}}</td>
             {{-- <td><a href="/edit/{{$product->id}}" class="btn btn-info">Edit</a></td> --}}
-            <td><a href="{{route('edit',$product->id)}}" class="btn btn-info">Edit</a></td>
-            <td><a href="{{route('delete',$product->id)}}" class="btn btn-danger">Delete</a></td>
+            <td><a href="{{route('edit',$product->id)}}" class="btn btn-info btn-sm">Edit</a></td>
+            <td><a href="{{route('delete',$product->id)}}" class="btn btn-danger btn-sm">Delete</a></td>
 
 
            
