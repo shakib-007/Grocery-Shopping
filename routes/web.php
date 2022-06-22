@@ -50,6 +50,11 @@ Route::get('/view/{id}',[InvoiceController::class, 'viewInvoice'])->name('view')
 
 Route::get('/deleteinvoice/{id}',[InvoiceController::class, 'deleteInvoice'])->name('deleteinvoice');
 
+//DOWNLOAD INVOICE
+
+Route::get('/downloadInvoice/{id}',[InvoiceController::class, 'downloadInvoice'])->name('downloadInvoice');
+
+
 
 
 

@@ -6,7 +6,7 @@
 <h2 style="color: rgb(18, 25, 119)">Product List</h2>
 <hr>
 <table style="width:100%" class="table table-striped" id="product">
-    <thead class="table-primary">
+    <thead >
     <tr>
         <th>SL</th>
         <th>Name</th>

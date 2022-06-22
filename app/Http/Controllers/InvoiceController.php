@@ -9,6 +9,8 @@ use App\Models\Invoice;
 use App\Models\SoldItem;
 use App\Models\Product;
 use App\Mail\OrderConfirmationMail;
+use PDF;
+
 
 class InvoiceController extends Controller
 {
@@ -179,10 +181,56 @@ class InvoiceController extends Controller
         
         // return view('internals.invoice');
         // return Invoice::all();
+        if($request->email){
 
-        Mail::to($request->email)->send(new OrderConfirmationMail($invoice->id));
+            $invoices = Invoice::find($invoice->id);
+            $products = Product::all();
+            $sold_items = SoldItem::where('invoice_id',$invoice->id)->get();
+
+            
+            $pdf = PDF::loadView('invoicePdf',compact('invoices','products','sold_items'))->setPaper('a4','potrait');
+            // $data['title'] = 'ordered confirmed';
+            $data['pdf'] = $pdf;
+            $data['email'] = $request->email;
+
+            Mail::send('emails.confirmationmail', $data, function($message) use($data) {       
+                $message->to($data["email"])
+                // ->subject($data["title"])
+                ->attachData($data['pdf']->output(), 
+                'shawpno.pdf', 
+                ['mime'=>'application/pdf']);
+      
+            });
+
+            Mail::send('emails.myTestMail', $data, function($message)use($data, $files) {
+                $message->to($data["email"], $data["email"])
+                        ->subject($data["title"]);
+     
+                foreach ($files as $file){
+                    $message->attach($file);
+                }
+                
+            });
+
+            // Mail::to($request->email)->send(new OrderConfirmationMail($invoice->id));
+
+
+        }
 
         return redirect('/invoicelist');
+
+    }
+
+    public function downloadInvoice($id)
+    {
+        $invoices = Invoice::find($id);
+        $products = Product::all();
+        $sold_items = SoldItem::where('invoice_id',$id)->get();
+
+        
+        $pdf = PDF::loadView('invoicePdf',compact('invoices','products','sold_items'))->setPaper('a4','potrait');
+                                                                            
+        return $pdf->stream('shawpno'.$id.'.pdf');
 
     }
 }

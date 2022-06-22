@@ -20,9 +20,9 @@ class OrderConfirmationMail extends Mailable
      *
      * @return void
      */
-    public function __construct($id)
+    public function __construct()
     {
-        $this->invoice = Invoice::find($id);
+        // $this->invoice = Invoice::find($id);
 
         //
         // $this->details = $details;
@@ -35,8 +35,10 @@ class OrderConfirmationMail extends Mailable
      */
     public function build()
     {
+        $this->invoice = Invoice::find($id);
+        // return view('invoiceDetails', compact('invoice', 'products', 'sold_items')); 
         return $this->subject('Mail from shakibur rahman')
-                    ->view('emails.confirmationmail')
-                    ->with('invoice',$this->invoice);
+                    ->view('invoicePdf');
+                    
     }
 }

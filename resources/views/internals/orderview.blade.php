@@ -26,6 +26,7 @@
     </table>
     <br>
     <hr>
+   
     <table align="center" style="width: 60%">
         <tr>
             <td><b>Select Product <b></b></td>
@@ -160,6 +161,7 @@
         </tr>
 
     </table>
+
     <hr>
     
 </form>
