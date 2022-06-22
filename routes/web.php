@@ -18,7 +18,7 @@ use App\Http\Controllers\SoldItemController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('/products',[ProductController::class,'productList'])->name('products');
 

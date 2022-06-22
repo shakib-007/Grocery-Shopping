@@ -7,7 +7,7 @@
 {{-- {{dd($sold_items)}} --}}
 <hr>
 <table style="width:100%" class="table table-striped" id="invoice">
-    <thead>
+    <thead class="table-active">
     <tr>
         <th>SL</th>
         <th>Invoice Number</th>
@@ -41,8 +41,8 @@
             </td>
            
             <td>{{$invoice->date}}</td>
-            <td><a href="/view/{{$invoice->id}}" class="btn btn-info btn-sm">View</a></td>
-            <td><a href="/deleteinvoice/{{$invoice->id}}" class="btn btn-danger btn-sm">Delete</a></td>
+            <td><a href="{{route('view',$invoice->id)}}" class="btn btn-info btn-sm">View</a></td>
+            <td><a href="{{route('deleteinvoice',$invoice->id)}}" class="btn btn-danger btn-sm">Delete</a></td>
 
 
            

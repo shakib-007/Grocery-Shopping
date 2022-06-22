@@ -3,7 +3,7 @@
 @section('content')
 <hr>
 <h2 style="color: rgb(18, 25, 119)">Order</h2>
-<form action="/placeorder" method="post">
+<form action="{{route('placeorder')}}" method="post">
     @csrf
     <hr>
     <table align="center" style="width:60%">

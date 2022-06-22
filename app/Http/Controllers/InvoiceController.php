@@ -194,6 +194,7 @@ class InvoiceController extends Controller
             $data["title"] = 'Order confirmed By Shawpno';
             // $data["pdf"] = $pdf;
             $data["email"] = $request->email;
+            $data['number'] = $invoices->invoice_number;
             $data["invoice"] = $invoices;
 
             // Mail::send('emails.confirmationmail', $data, function($message) use($data) {       
@@ -208,7 +209,7 @@ class InvoiceController extends Controller
             Mail::send('emails.confirmationmail', $data, function($message)use($data,$pdf) {
                 $message->to($data["email"])
                         ->subject($data["title"])
-                        ->attachData( $pdf->output(),"shawpno.pdf"); 
+                        ->attachData( $pdf->output(),"shawpno".$data['number'].".pdf"); 
                 
             });
 

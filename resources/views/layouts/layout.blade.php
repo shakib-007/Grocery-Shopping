@@ -13,12 +13,12 @@
     <title>SHAWPNO</title>
 </head>
 <body>
-    <ul class="nav" style="background-color:rgb(10, 41, 87);">
+    <ul class="nav sticky-top" style="background-color:rgb(10, 41, 87);">
         {{-- <li class="nav-item" >
           <a class="nav-link active"  href="{{route('in')}}">Home</a>
         </li> --}}
         <li class="nav-item">
-          <a class="nav-link text-white" href="/"><b>Home</b></a>
+          <a class="nav-link text-white" href="{{route('home')}}"><b>Home</b></a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white" href="{{route('show')}}"><b>Product List</b></a>
