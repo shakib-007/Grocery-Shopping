@@ -10,7 +10,8 @@ use App\Models\SoldItem;
 use App\Models\Product;
 use App\Mail\OrderConfirmationMail;
 use PDF;
-
+// use DB;
+// use Mail;
 
 class InvoiceController extends Controller
 {
@@ -189,26 +190,25 @@ class InvoiceController extends Controller
 
             
             $pdf = PDF::loadView('invoicePdf',compact('invoices','products','sold_items'))->setPaper('a4','potrait');
-            // $data['title'] = 'ordered confirmed';
-            $data['pdf'] = $pdf;
-            $data['email'] = $request->email;
 
-            Mail::send('emails.confirmationmail', $data, function($message) use($data) {       
-                $message->to($data["email"])
-                // ->subject($data["title"])
-                ->attachData($data['pdf']->output(), 
-                'shawpno.pdf', 
-                ['mime'=>'application/pdf']);
+            $data["title"] = 'Order confirmed By Shawpno';
+            // $data["pdf"] = $pdf;
+            $data["email"] = $request->email;
+            $data["invoice"] = $invoices;
+
+            // Mail::send('emails.confirmationmail', $data, function($message) use($data) {       
+            //     $message->to($data["email"])
+            //     ->subject($data["title"])
+            //     ->attachData($data['pdf']->output(), 
+            //     'shawpno.pdf', 
+            //     ['mime'=>'application/pdf']);
       
-            });
+            // });
 
-            Mail::send('emails.myTestMail', $data, function($message)use($data, $files) {
-                $message->to($data["email"], $data["email"])
-                        ->subject($data["title"]);
-     
-                foreach ($files as $file){
-                    $message->attach($file);
-                }
+            Mail::send('emails.confirmationmail', $data, function($message)use($data,$pdf) {
+                $message->to($data["email"])
+                        ->subject($data["title"])
+                        ->attachData( $pdf->output(),"shawpno.pdf"); 
                 
             });
 
@@ -227,10 +227,28 @@ class InvoiceController extends Controller
         $products = Product::all();
         $sold_items = SoldItem::where('invoice_id',$id)->get();
 
-        
+        $pdf = PDF::loadView('invoicePdf',compact('invoices','products','sold_items'))->setPaper('a4','potrait');
+                                                                            
+        return $pdf->download('shawpno'.$id.'.pdf');
+
+    }
+
+    public function viewPdf($id)
+    {
+        // $sold_items = SoldItem::join('products as p' , 'p.id', '=' ,'sold_items.product_id')
+        // ->select('p.name' ,'p.sku' ,'p.description' ,'p.purchase_price' ,'sold_items.quantity' , 'sold_items.selling_price' )
+        // ->where('sold_items.invoice_id', '=', $id)
+        // ->get();
+        // $invoices = Invoice::find($id);
+
+        $invoices = Invoice::find($id);
+        $products = Product::all();
+        $sold_items = SoldItem::where('invoice_id',$id)->get();
+
         $pdf = PDF::loadView('invoicePdf',compact('invoices','products','sold_items'))->setPaper('a4','potrait');
                                                                             
         return $pdf->stream('shawpno'.$id.'.pdf');
 
     }
+
 }

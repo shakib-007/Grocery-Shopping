@@ -79,6 +79,7 @@
     </tr>
 </table>
 <center> 
+    <a href="{{route('viewpdf',$invoices->id)}}" class="btn btn-info ">View Invoice</a>
     <a href="{{route('downloadInvoice',$invoices->id)}}" class="btn btn-info ">Download Invoice</a>
 </center>
 
