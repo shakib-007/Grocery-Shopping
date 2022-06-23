@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Events\NewProductAddedEvent;
 
 class ProductController extends Controller
 {
@@ -52,7 +53,11 @@ class ProductController extends Controller
         $product->purchase_price = $request->purchaseprice;
         $product->save();
 
-        return redirect('/show')->with('success','Product Added');
+        event(new NewProductAddedEvent($product));
+
+        dump('new product');
+
+        // return redirect('/show')->with('success','Product Added');
     }
 
     public function editProduct($id)
