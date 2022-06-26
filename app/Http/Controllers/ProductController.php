@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Events\NewProductAddedEvent;
+use App\Http\Controllers\Response;
 
 class ProductController extends Controller
 {
@@ -41,8 +43,10 @@ class ProductController extends Controller
             'sku' => 'required',
             'description' => 'required',
             'availablequantity' => 'required',
-            'purchaseprice' => 'required'
+            'purchaseprice' => 'required',
+            'image' => 'image|max:3072'
         ]);
+
 
         $product = new Product();
 
@@ -51,13 +55,27 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->available_quantity = $request->availablequantity;
         $product->purchase_price = $request->purchaseprice;
+        // $product->save();
+
+        if($request->hasFile('image'))
+        {
+            $imageName = time().'.'.$request->image->extension();      
+            // $request->image->move(public_path('images'), $imageName);
+            $request->image->storeAs('images', $imageName);
+            $product->image = $imageName;
+             
+            // $url = Storage::url('file.jpg');
+        }
+        else{
+            $fileNameToStore = 'noimage.jpg';
+        }
         $product->save();
 
-        event(new NewProductAddedEvent($product));
+        // event(new NewProductAddedEvent($product));
 
-        dump('new product');
+        // dump('new product');
 
-        // return redirect('/show')->with('success','Product Added');
+        return redirect('/show')->with('success','Product Added');
     }
 
     public function editProduct($id)

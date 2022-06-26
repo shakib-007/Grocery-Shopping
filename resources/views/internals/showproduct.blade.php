@@ -9,6 +9,7 @@
     <thead class="table-active">
     <tr>
         <th>SL</th>
+        <th>Image</th>
         <th>Name</th>
         <th>Sku</th>
         <th>Description</th>
@@ -25,6 +26,11 @@
     @foreach ( $products as $product )
         <tr>
             <td>{{++$serial}}</td>
+            <td> 
+                @if ($product->image)
+                    <img src="{{ asset('storage/app/images/'.$product->image) }}" height="30px" alt="{{ $product->name }} Image">
+                @endif    
+            </td>
             <td>{{$product->name}}</td>
             <td>{{$product->sku}}</td>
             <td>{{$product->description}}</td>

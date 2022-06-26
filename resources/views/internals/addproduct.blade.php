@@ -3,7 +3,7 @@
 @section('content')
 <hr>
 <h2 style="color: rgb(18, 25, 119)">Add Product</h2>
-<form action="{{route('store')}}" method="post">
+<form action="{{route('store')}}" method="post" enctype="multipart/form-data">
     @csrf
    <hr>
     <table align="center" >
@@ -14,6 +14,7 @@
         <tr>
             <td>Name : </td>
             <td><input type="text" name="name" id="" placeholder="Product Name" class="form-control" ></td>
+            {{-- <td>{{$errors->first('name')}}</td> --}}
         </tr>
    
         <tr>
@@ -31,6 +32,10 @@
         <tr>
             <td>Purchase Price : </td>
             <td><input type="number" name="purchaseprice" id=""placeholder="Purchase Price" class="form-control"></td>
+        </tr>
+        <tr>
+            <td>Upload Product Image : </td>
+            <td><input type="file" id="" name="image" class="form-control"></td>
         </tr>
        <tr>
         <td><hr></td>

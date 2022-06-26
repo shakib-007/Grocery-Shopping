@@ -46,7 +46,9 @@
                 <td><input type="number" name="sellingprice"></td>
             </tr>
         @endforeach --}}
-
+        
+            
+        
         <tr>
             <td>
                 <select name="product1" class="form-select" >
@@ -150,7 +152,7 @@
             <td><input type="number" name="price6" class="form-control"></td>
             <td><input type="number" name="quantity6" class="form-control"></td>
         </tr>
-
+        
         <tr>
             
             <td align="right">
