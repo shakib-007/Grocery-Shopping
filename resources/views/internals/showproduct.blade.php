@@ -17,6 +17,7 @@
         <th>Purchase Price</th>
         <th>Operation</th>
         <th></th>
+        <th></th>
     </tr>
  </thead>
     @php
@@ -34,9 +35,16 @@
             <td>{{$product->name}}</td>
             <td>{{$product->sku}}</td>
             <td>{{$product->description}}</td>
-            <td>{{$product->available_quantity}}</td>
+            <td>
+                @if ($product->available_quantity <= 0)
+                    <p style="color: red">not available!</p>
+                @else
+                    {{$product->available_quantity}}
+                @endif
+            </td>
             <td>{{$product->purchase_price}}</td>
             {{-- <td><a href="/edit/{{$product->id}}" class="btn btn-info">Edit</a></td> --}}
+            <td><a href="{{route('viewproduct',$product->id)}}" class="btn btn-info btn-sm">View</a></td>
             <td><a href="{{route('edit',$product->id)}}" class="btn btn-info btn-sm">Edit</a></td>
             <td><a href="{{route('delete',$product->id)}}" class="btn btn-danger btn-sm">Delete</a></td>
 

@@ -85,14 +85,22 @@ class ProductController extends Controller
         return view('internals.editproduct')->with('product',$product);
     }
 
+    public function viewProduct($id)
+    {
+        $product = Product::find($id);
+        return view('internals.viewproduct')->with('product',$product);
+    }
+
     public function updateProduct(Request $request , $id)
     {
+        
         $this->validate($request, [
             'name' => 'required',
             'sku' => 'required',
             'description' => 'required',
             'availablequantity' => 'required',
-            'purchaseprice' => 'required'
+            'purchaseprice' => 'required',
+            'image' => 'max:3072'
         ]);
         
         $product = Product::find($id);
@@ -101,6 +109,17 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->available_quantity = $request->availablequantity;
         $product->purchase_price = $request->purchaseprice;
+
+        if($request->image)
+        {
+            $imageName = time().'.'.$request->image->extension();    
+            $request->image->storeAs('images', $imageName);
+            $product->image = $imageName;
+        }
+        else{
+            $fileNameToStore = 'noimage.jpg';
+        }
+
         $product->save();
 
         return redirect('/show')->with('success','Product Updated');

@@ -36,6 +36,8 @@ Route::post('/update/{id}', [ProductController::class, 'updateProduct'])->name('
 
 Route::get('/delete/{id}', [ProductController::class, 'deleteProduct'])->name('delete');
 
+Route::get('/viewproduct/{id}', [ProductController::class, 'viewProduct'])->name('viewproduct');
+
 //ORDER
 
 Route::get('/orderview',[ProductController::class, 'order'])->name('orderview');
