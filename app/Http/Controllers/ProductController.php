@@ -59,11 +59,12 @@ class ProductController extends Controller
 
         if($request->hasFile('image'))
         {
+            // $request->image->move(public_path('images'), $imageName); //MOVE IMAGE TO PUBLIC FOLDER
+            
             $imageName = time().'.'.$request->image->extension();      
-            // $request->image->move(public_path('images'), $imageName);
             $request->image->storeAs('images', $imageName);
             $product->image = $imageName;
-             
+            
             // $url = Storage::url('file.jpg');
         }
         else{
@@ -71,7 +72,7 @@ class ProductController extends Controller
         }
         $product->save();
 
-        // event(new NewProductAddedEvent($product));
+        event(new NewProductAddedEvent($product));
 
         // dump('new product');
 

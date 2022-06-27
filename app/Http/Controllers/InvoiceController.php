@@ -88,6 +88,11 @@ class InvoiceController extends Controller
             $item['product_id'] = $request->product1;
             $item['quantity'] = $request->quantity1;
             $item['selling_price'] = $request->price1;
+
+            $product = Product::find($request->product1);
+            $product->available_quantity -= $request->quantity1;
+            $product->save();
+
             $cart[] = $item;
 
         }
@@ -99,6 +104,11 @@ class InvoiceController extends Controller
             $item['product_id'] = $request->product2;
             $item['quantity'] = $request->quantity2;
             $item['selling_price'] = $request->price2;
+
+            $product = Product::find($request->product2);
+            $product->available_quantity -= $request->quantity2;
+            $product->save();
+
             $cart[] = $item;
 
         }
@@ -110,6 +120,11 @@ class InvoiceController extends Controller
             $item['product_id'] = $request->product3;
             $item['quantity'] = $request->quantity3;
             $item['selling_price'] = $request->price3;
+
+            $product = Product::find($request->product3);
+            $product->available_quantity -= $request->quantity3;
+            $product->save();
+
             $cart[] = $item;
 
         }
@@ -121,6 +136,11 @@ class InvoiceController extends Controller
             $item['product_id'] = $request->product4;
             $item['quantity'] = $request->quantity4;
             $item['selling_price'] = $request->price4;
+
+            $product = Product::find($request->product4);
+            $product->available_quantity -= $request->quantity4;
+            $product->save();
+
             $cart[] = $item;
 
         }
@@ -132,6 +152,11 @@ class InvoiceController extends Controller
             $item['product_id'] = $request->product5;
             $item['quantity'] = $request->quantity5;
             $item['selling_price'] = $request->price5;
+
+            $product = Product::find($request->product5);
+            $product->available_quantity -= $request->quantity5;
+            $product->save();
+
             $cart[] = $item;
 
         }
@@ -144,6 +169,11 @@ class InvoiceController extends Controller
             $item['product_id'] = $request->product6;
             $item['quantity'] = $request->quantity6;
             $item['selling_price'] = $request->price6;
+
+            $product = Product::find($request->product6);
+            $product->available_quantity -= $request->quantity6;
+            $product->save();
+
             $cart[] = $item;
 
         }
