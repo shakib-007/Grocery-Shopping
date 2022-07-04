@@ -129,9 +129,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-  
+        
         return redirect('/show')->with('success','Product Deleted');
-
     }
 
     public function order()

@@ -29,7 +29,7 @@
             <td>{{++$serial}}</td>
             <td> 
                 @if ($product->image)
-                    <img src="{{ asset('storage/app/images/'.$product->image) }}" height="30px" alt="{{ $product->name }} Image">
+                    <img src="{{ asset('storage/app/images/'.$product->image) }}" height="30px"  alt="{{ $product->name }} Image">
                 @endif    
             </td>
             <td>{{$product->name}}</td>
@@ -37,7 +37,8 @@
             <td>{{$product->description}}</td>
             <td>
                 @if ($product->available_quantity <= 0)
-                    <p style="color: red">not available!</p>
+                
+                    <strong style="color: red">not available!</strong>
                 @else
                     {{$product->available_quantity}}
                 @endif
