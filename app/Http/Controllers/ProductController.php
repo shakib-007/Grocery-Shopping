@@ -38,14 +38,14 @@ class ProductController extends Controller
 
     public function storeProduct(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'sku' => 'required',
-            'description' => 'required',
-            'availablequantity' => 'required',
-            'purchaseprice' => 'required',
-            'image' => 'image|max:3072'
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'sku' => 'required',
+        //     'description' => 'required',
+        //     'availablequantity' => 'required',
+        //     'purchaseprice' => 'required',
+        //     'image' => 'image|max:3072'
+        // ]);
 
 
         $product = new Product();
